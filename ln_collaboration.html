@@ -221,6 +221,27 @@
   .niche-card p{margin-top:10px;color:var(--fg-dim);font-size:.95rem;position:relative;}
   .niche-icon{width:38px;height:38px;margin-top:16px;color:var(--blue);position:relative;}
 
+  /* ---------- insight strip + value cards ---------- */
+  .insight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:44px;}
+  .insight-tile{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:26px 22px;}
+  .insight-tile .num{font-family:'Fraunces',serif;font-weight:700;font-size:2.2rem;font-variant-numeric:tabular-nums;}
+  .insight-tile .lbl{font-size:12px;color:var(--fg-dim);margin-top:6px;}
+  .insight-tile .sub{font-size:11px;color:var(--fg-dim);opacity:.75;margin-top:2px;}
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .value-card{
+    background:var(--card);border:1px solid var(--hair);border-radius:22px;padding:34px 28px;
+    transition:transform .4s cubic-bezier(.16,.8,.24,1), box-shadow .4s ease;position:relative;overflow:hidden;
+  }
+  .value-card::before{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s ease;
+    background:linear-gradient(140deg,rgba(201,162,39,0.10),rgba(139,92,246,0.06) 60%,transparent);
+  }
+  .value-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .value-card:hover::before{opacity:1;}
+  .value-idx{font-family:'Fraunces',serif;font-weight:600;font-size:13px;color:var(--fg-dim);position:relative;}
+  .value-card h3{font-size:1.2rem;margin-top:16px;position:relative;}
+  .value-card p{margin-top:10px;color:var(--fg-dim);font-size:.92rem;position:relative;}
+
   /* ---------- portfolio ---------- */
   .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
   .filter-btn{
@@ -282,7 +303,7 @@
 
   /* ---------- trusted by marquee ---------- */
   .marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
-  .marquee-track{display:flex;gap:70px;width:max-content;animation:scroll-left 30s linear infinite;}
+  .marquee-track{display:flex;gap:56px;width:max-content;animation:scroll-left 220s linear infinite;}
   .marquee:hover .marquee-track{animation-play-state:paused;}
   @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   .brand-word{font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;color:var(--fg-dim);opacity:.6;letter-spacing:0.02em;white-space:nowrap;filter:grayscale(1);}
@@ -407,6 +428,8 @@
     #about .about-grid{grid-template-columns:1fr;}
     .about-photo{max-width:420px;margin:0 auto;}
     .niche-grid{grid-template-columns:repeat(2,1fr);}
+    .insight-grid{grid-template-columns:repeat(2,1fr);}
+    .value-grid{grid-template-columns:repeat(2,1fr);}
     .work-grid{grid-template-columns:repeat(4,1fr);}
     .work-item{grid-column:span 4 !important;}
     .blog-grid{grid-template-columns:repeat(2,1fr);}
@@ -429,6 +452,8 @@
     #navToggle{display:flex;}
     .nav-cta{display:none;}
     .niche-grid{grid-template-columns:1fr;}
+    .insight-grid{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:1fr;}
     .work-grid{grid-template-columns:1fr;}
     .work-item{grid-column:span 1 !important;}
     .blog-grid{grid-template-columns:1fr;}
@@ -523,9 +548,9 @@
       <h2 style="margin-top:16px;">A storyteller who turns everyday moments into content that connects.</h2>
       <p class="bio">I'm Lilis Badriyah — a Jakarta-based content creator and digital storyteller. Over the past five years I've helped brands and audiences find each other through honest, visually-led content: lifestyle features, product storytelling, and campaign videos built to actually get watched. My work sits at the intersection of editorial craft and platform-native creativity, which means every project is shaped around how people really scroll, watch, and share.</p>
       <div class="stat-grid">
-        <div class="stat"><div class="num">50+</div><div class="lbl">Projects delivered</div></div>
-        <div class="stat"><div class="num">20+</div><div class="lbl">Brand collaborations</div></div>
-        <div class="stat"><div class="num">100K+</div><div class="lbl">Engaged audience</div></div>
+        <div class="stat"><div class="num">300+</div><div class="lbl">Projects delivered</div></div>
+        <div class="stat"><div class="num">500+</div><div class="lbl">Brand collaborations</div></div>
+        <div class="stat"><div class="num">1M+</div><div class="lbl">Engaged audience</div></div>
         <div class="stat"><div class="num">5+</div><div class="lbl">Years creating</div></div>
       </div>
       <div class="meta-row">
@@ -601,6 +626,18 @@
   </div>
   <div class="marquee reveal">
     <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</section>
+
+<!-- VALUE FOR BRANDS -->
+<section id="value">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="eyebrow">For brands &amp; agencies</span><h2>Why Brands Partner With Me</h2></div>
+      <p class="side">Real account performance, not projections — pulled directly from Instagram's own Insights.</p>
+    </div>
+    <div class="insight-grid reveal" id="insightGrid"></div>
+    <div class="value-grid" id="valueGrid"></div>
   </div>
 </section>
 
@@ -694,7 +731,7 @@
         <div class="form-status" id="formStatus"></div>
       </form>
       <div class="contact-info reveal">
-        <div class="info-card"><div class="lbl">Email</div><div class="val">hello@lncreatormanagement.com</div></div>
+        <div class="info-card"><div class="lbl">Email</div><div class="val">lilisbadriyah0112@gmail.com</div></div>
         <div class="info-card"><div class="lbl">WhatsApp / Collaboration</div><div class="val">+62 877-7757-4968</div></div>
         <div class="info-card"><div class="lbl">Instagram DM</div><div class="val">@lilisbadriyahh</div></div>
         <div class="info-card"><div class="lbl">Location</div><div class="val">Jakarta, Indonesia</div></div>
@@ -853,7 +890,20 @@
     {t:"Creative Consultation",d:"An outside eye on your content strategy, tone, and creative direction.",deliv:"Audit · Recommendations · Workshop"}
   ];
 
-  var brands = ["NESCAFÉ","INDOFOOD — ROYAL PALMIA","PROPAN","SUNPRIDE","MINISO","MERCURE HOTELS"];
+  var brands = ["NESCAFÉ","INDOFOOD — ROYAL PALMIA","PROPAN","SUNPRIDE","MINISO","MERCURE HOTELS",
+    "ENFAGROW","HOLLYLAND","UWANT","TOSHIBA","MEDIATECH","ZWITSAL","VANISH","ACMIC","PHILIPS","MECOO",
+    "BODIMAX","SKINTIFIC","KJ PERABOT","ARISTON","MAKARIZO","LIBBY BABY","PEPSODENT","FIF GROUP","BEBIOTIC",
+    "REALFOOD","ECENTIO","JKT CHEESE FACTORY","MINIBITES SWEET","AROEM BEKASI","CLICK HOUSE","EMADOS",
+    "PATCHME","NEOZEN","SKINDOZE","CHRISTY NG","AGE FREE","DIBAO","OXONE","ROSCHEL","PERYSMITH","STOCKITY",
+    "PIPIT AI","BIMOBIMO","JKT FAIR","SUSHIGAN","DUORAMPAI","DSDL JKT","ASTON PLUIT","SWISS-BELINN CAWANG",
+    "SWISS-BELHOTEL AIRPORT","ZEST AIRPORT","MERCURE TANGERANG CITY CENTRE","NOVOTEL KARAWANG","RESINDA HOTEL",
+    "TREMBESI BSD","DUFAN","ANCOL","WAROENG BTS","PUPUT TIAM CIBUBUR","PUPUT TIAM BOGOR","YAY! GRILL",
+    "ATRIA RESIDENCES SERPONG","AMANAIA","TALAGA SAMPIREUN","INDOMILK KIDS","I CAN READ TAMAN MINI",
+    "KOPI AHPOONG SENTUL","KOPI TUBING SENTUL","AMAROO DINING & CAFE","AYAM KAMPOENG PANGLIMA",
+    "HORISON ULTIMATE RASUNA","SAKALAVASA VILLA","SELARAS SAMBAL","TENKAICHI","BEST WESTERN PREMIER HOTEL",
+    "SAMBAL AYANG BEB","BIKA BOGOR","FRONTONE AKSHAYA KARAWANG","AMBHARA JAKARTA","VILLA MICHIKO",
+    "ANDA WELLNESS","FAIRFIELD BEKASI","PADJADJARAN BOGOR","LORIN HOTEL SENTUL","GRAND TJOKRO BANDUNG",
+    "LALOBA BANDUNG","DAPOER HERITAGE","JABARANO COFFEE"];
 
   var testimonials = [
     {q:"Lilis has an eye for the small, specific detail that makes a campaign feel human instead of scripted. Our engagement doubled the week her series ran.",name:"A. Pratama",role:"Marketing Lead, Northpeak Living",color:"#3E5CF6"},
@@ -926,6 +976,21 @@
     }
   ];
 
+  var insights = [
+    {num:"2.2M+",lbl:"30-Day Reach",sub:"Across Reels, posts &amp; stories"},
+    {num:"338K+",lbl:"Interactions (30 days)",sub:"Likes, comments &amp; reposts"},
+    {num:"4.9K+",lbl:"Profile Visits (30 days)",sub:"Direct from content"},
+    {num:"89.8%",lbl:"Reach Beyond Followers",sub:"Non-follower audience"}
+  ];
+
+  var values = [
+    {n:"01",t:"Reach",d:"±127K–130K Instagram followers, cross-checked across different tracking sources and crawl dates."},
+    {n:"02",t:"Engagement",d:"Publicly tracked engagement rate sits between 2.76%–4.65%, depending on source and methodology."},
+    {n:"03",t:"Storytelling",d:"Products are woven into real, everyday life stories — not staged, obvious advertising."},
+    {n:"04",t:"Product Experience",d:"Especially strong for products that need to show how they're used, worn, or what they deliver."},
+    {n:"05",t:"Conversion",d:"Pairs well with promo codes, CTAs, event visits, product trials, or shopping-activation formats."}
+  ];
+
   /* ---------------- render helpers ---------------- */
   function el(html){var d=document.createElement("div");d.innerHTML=html.trim();return d.firstChild;}
 
@@ -937,6 +1002,20 @@
         '<svg class="niche-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+n.icon+'</svg>'+
         '<h3>'+n.t+'</h3><p>'+n.d+'</p>'+
       '</div>'
+    ));
+  });
+
+  var insightGrid = document.getElementById("insightGrid");
+  insights.forEach(function(i){
+    insightGrid.appendChild(el(
+      '<div class="insight-tile reveal"><div class="num">'+i.num+'</div><div class="lbl">'+i.lbl+'</div><div class="sub">'+i.sub+'</div></div>'
+    ));
+  });
+
+  var valueGrid = document.getElementById("valueGrid");
+  values.forEach(function(v){
+    valueGrid.appendChild(el(
+      '<div class="value-card reveal"><div class="value-idx">'+v.n+'</div><h3>'+v.t+'</h3><p>'+v.d+'</p></div>'
     ));
   });
 
